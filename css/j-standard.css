@@ -1,0 +1,99 @@
+/* reset */
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, th, td, tr, table, tbody, thead, tfoot, em, strong, span, img, section, input {
+  padding: 0;
+  margin: 0;
+}
+textarea, p {
+  margin: 0 0 10px 0;
+}
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+body {
+  -webkit-touch-callout: none;
+  text-size-adjust: none;
+  font-family: "PingFang SC", "Helvetica" "Neue", "Hiragino Sans GB", "Helvetica", "Microsoft YaHei", "Arial";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: all 1s;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+img {
+  border: 0 none;
+  vertical-align: middle;
+}
+em {
+  font-weight: normal;
+  font-style: normal;
+}
+h4, h5, h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+a {
+  text-decoration: none;
+  color: #337ab7;
+  transition: 0.1s color ease-out;
+}
+a:focus, a:hover {
+  color: #23527c;
+  text-decoration: underline;
+}
+input, textarea {
+  font-size: 12px;
+  line-height: 1.42857143;
+  outline: 0;
+  outline: 0 none;
+  appearance: none;
+  border-radius: 0;
+  border: none;
+  box-sizing: border-box;
+}
+input, textarea, button {
+  font-family: "PingFang SC", "Helvetica" "Neue", "Hiragino Sans GB", "Helvetica", "Microsoft YaHei", "Arial";
+}
+button {
+  line-height: 1;
+  font-weight: 500;
+}
+:not(input, textarea) {
+  -webkit-user-select: none;
+  user-select: none;
+}
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  word-break: break-all;
+  touch-action: manipulation;
+  -webkit-touch-action: manipulation;
+  -ms-touch-action: manipulation;
+}
+[hidden] {
+  display: none !important;
+}
+
+/*自定义*/
+.text-right {
+  text-align: right;
+}
+
+.margin-1 {
+  margin: 10px;
+}
+
+.margin-r2 {
+  margin-right: 20px;
+}
+
+
+.bold {
+  font-weight: bold;
+}
+.lt {
+  font-size: 13px;
+}

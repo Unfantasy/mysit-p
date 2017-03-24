@@ -1,0 +1,61 @@
+.my-padding-v2 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.my-margin-v1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.my-margin-v2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.my-margin-vb2 {
+  margin-bottom: 20px;
+}
+/*singer content*/
+.nowrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+/*end singer content*/
+
+.my-lt-fs {
+  font-size: 22px !important;
+}
+
+.table-title {
+  max-width: 15em;
+}
+
+.table-content {
+  max-width: 30em;
+}
+
+.table-content-box {
+  height: 3em;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+.table-operation {
+  width: 7em;
+}
+
+pre {
+  display: none;
+}
+@media (max-width: 1000px) {
+  .table-title {
+    max-width: 7em;
+  }
+
+  .table-content {
+    max-width: 10em;
+  }
+}
+/* summernote hacker */
+.note-editor .form-group {
+  margin: 0;
+}
