@@ -11,7 +11,7 @@
   $sitepath = SITEROOT."/images";
   // $path = str_replace('\\', '/', $path);
   $allowExt=array("gif","jpeg","png","jpg");
-  $maxSize=2097152;
+  // $maxSize=2097152;
   $imgFlag=true;
   if(!file_exists($path)){
 		mkdir($path,0777,true);
@@ -40,11 +40,11 @@
 				}
 			}
 			//上传文件的大小
-			if($file['size']>$maxSize){
-				$data['errorMsg'] = "上传文件过大";
-        echo json_encode($data);
-        return false;
-			}
+			// if($file['size']>$maxSize){
+			// 	$data['errorMsg'] = "上传文件过大";
+      //   echo json_encode($data);
+      //   return false;
+			// }
 			if(!is_uploaded_file($file['tmp_name'])){
 				$data['errorMsg'] = "不是通过HTTP POST方式上传上来的";
         echo json_encode($data);
@@ -123,4 +123,5 @@
   	}
   	return $files;
   }
+
 ?>
