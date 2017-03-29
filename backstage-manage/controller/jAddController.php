@@ -55,9 +55,9 @@
         // 成功 往数据库添加数据
         // 先判断数据库中是否有这条数据有的话就不添加了
         $sitedestination = $sitepath.'/'.$file['name'];
-        $record = fetchOne('select * from mr_long where imgpath = '."'$sitedestination'");
+        $record = fetchOne('select * from jkp where imgpath = '."'$sitedestination'");
         if(!$record) {
-          $insertid = insert('mr_long', array(
+          $insertid = insert('jkp', array(
             'imgpath' => $sitedestination,
             'decription' => $decription
           ));

@@ -1,6 +1,6 @@
 <?php
 	require_once 'include.php';
-	$sql = "select * from mr_long";
+	$sql = "select * from jkp";
 	$data = fetchAll($sql);
 ?>
 <!DOCTYPE html>
@@ -8,12 +8,12 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>龙神威武</title>
+	<title>My Love</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="author" content="FREEHTML5.CO" />
-  <link rel="shotcut icon" href="images/jclf.ico"/>
+  <link rel="shotcut icon" href="images/jkp.ico"/>
 
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">

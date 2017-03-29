@@ -2,10 +2,10 @@
   require_once '../../include.php';
 
   $id = $_GET['id'];
-  $path = fetchOne('select * from mr_long where id = '.$id)['imgpath'];
+  $path = fetchOne('select * from jkp where id = '.$id)['imgpath'];
   $rPath = str_replace('http://jiduo.org', '', $path);
   $pPath = ROOT.$rPath;
-  if (delete('mr_long', 'id = '.$id) && unlink($pPath)) {
+  if (delete('jkp', 'id = '.$id) && unlink($pPath)) {
     echo "<script>alert('删除成功');window.location.href='../mr-long.php';</script>";
   } else {
     echo "<script>alert('删除失败');</script>";
