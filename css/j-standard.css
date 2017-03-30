@@ -45,22 +45,8 @@ a:focus, a:hover {
   color: #23527c;
   text-decoration: underline;
 }
-input, textarea {
-  font-size: 12px;
-  line-height: 1.42857143;
-  outline: 0;
-  outline: 0 none;
-  appearance: none;
-  border-radius: 0;
-  border: none;
-  box-sizing: border-box;
-}
 input, textarea, button {
   font-family: "PingFang SC", "Helvetica" "Neue", "Hiragino Sans GB", "Helvetica", "Microsoft YaHei", "Arial";
-}
-button {
-  line-height: 1;
-  font-weight: 500;
 }
 :not(input, textarea) {
   -webkit-user-select: none;
@@ -78,6 +64,10 @@ button {
 }
 
 /*自定义*/
+.hidden {
+  display: none !important;
+}
+
 .text-right {
   text-align: right;
 }
