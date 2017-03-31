@@ -93,6 +93,10 @@
       var answer = $('#summernote').summernote('code');
       var question = $('.question').val();
       var type = $('input[name="type"]:checked').val();
+      if () {
+        alert('问题或回答为空。');
+        return;
+      }
       var data = { 'answer': answer, 'question': question, 'type': type };
       // console.log(JSON.stringify(data));
       $.ajax({

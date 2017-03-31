@@ -1,12 +1,10 @@
 <?php
-	require_once('tools/connect.php');
+	require_once '../include.php';
 	$id = intval($_GET['id']);
-	$sql = "select * from jd_question where id=$id";
-	$query = mysql_query($sql);
-	if($query&&mysql_num_rows($query)){
-		$question = mysql_fetch_assoc($query);
-	}else{
-		echo "贝壳不存在";
+	$sql = "select * from jd_article where id=$id";
+	$article = fetchOne($sql);
+	if(!$article){
+		echo "文章不存在";
 		exit;
 	}
 ?>
@@ -42,26 +40,33 @@
     <?php require_once('nav.php'); ?>
     <div id="page-wrapper">
       <div class="col-md-12 graphs">
-        <h3 class="text-center my-margin-vb2">修改贝壳</h3>
+        <h3 class="text-center my-margin-vb2">修改文章</h3>
         <form action="" class="form-horizontal" onsubmit="return false">
           <div class="form-group">
             <label class="col-sm-2 control-label">类别：</label>
 						<div class="col-sm-8">
-              <div class="radio-inline"><label><input type="radio" name="type" value="css">CSS</label></div>
-              <div class="radio-inline"><label><input type="radio" name="type" value="js">JS</label></div>
-              <div class="radio-inline"><label><input type="radio" name="type" value="other">其他</label></div>
+							<div class="radio-inline"><label><input type="radio" name="type" value="travel">游记</label></div>
+              <div class="radio-inline"><label><input type="radio" name="type" value="tech">技术</label></div>
+              <div class="radio-inline"><label><input type="radio" name="type" value="humor">心情</label></div>
+              <div class="radio-inline"><label><input type="radio" checked name="type" value="other">其他</label></div>
+            </div>
+          </div>
+					<div class="form-group">
+            <label class="col-sm-2 control-label">标题：</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control1 J_title" value="<?php echo $article['title'] ?>">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label">标题：</label>
+            <label class="col-sm-2 control-label">摘要：</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control1 question" value="<?php echo $question['question'] ?>">
+              <input type="text" class="form-control1 J_abstract" value="<?php echo $article['abstract'] ?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-2 control-label">内容：</label>
             <div class="col-sm-8">
-              <div id="summernote" class="summernote"><?php echo $question['answer']; ?></div>
+              <div id="summernote" class="summernote"><?php echo $article['content']; ?></div>
             </div>
           </div>
           <div class="form-group">
@@ -86,19 +91,16 @@
 		<script src="js/myfunction.js"></script>
     <script>
     $('#summernote').summernote({ height: 300 });
-		$('[value="<?php echo $question['type'] ?>"]').prop('checked', 'checked');
+	$('[value="<?php echo $article['type'] ?>"]').prop('checked', 'checked');
     $('.submit').on('click', function(){
-      var answer = $('#summernote').summernote('code');
-      var question = $('.question').val();
+      var content = $('#summernote').summernote('code');
+			var title = $('.J_title').val();
+      var abstract = $('.J_abstract').val();
       var type = $('input[name="type"]:checked').val();
 			var id = theRequest['id'];
-			if (!content || !title) {!
-        alert('标题或内容为空');
-        return;
-      }
-			var data = { 'answer': answer, 'question': question, 'type': type, 'id': id };
+      var data = { 'title': title, 'content': content, 'abstract': abstract, 'type': type, 'id': id };
       $.ajax({
-        url:'controller/questionUpdateController.php',
+        url:'controller/articleUpdateController.php',
         type: 'post',
         dataType: 'json',
         data: data,
@@ -115,9 +117,12 @@
           }
         },
         error: function(e) {
-          console.log('error', JSON.stringify(e));
-          alert('error: ' + JSON.stringify(e));
-          // window.location.reload();
+					console.log('error', e);
+          if(e.readyState == 4) {
+            $('body').prepend(e.responseText);
+          } else {
+            alert('服务器返回异常');
+          }
         }
       });
     });

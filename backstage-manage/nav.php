@@ -20,6 +20,9 @@
         <li>
           <a href="mr-long.php">龙哥</a>
         </li>
+        <li>
+          <a href="articles.php">文章</a>
+        </li>
         <!-- <li>
           <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Css<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">

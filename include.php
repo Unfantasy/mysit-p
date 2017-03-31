@@ -8,4 +8,5 @@ require_once 'mysql.func.php';
 require_once 'upload.func.php';
 require_once 'mysql.config.php';
 require_once 'user.config.php';
+// 连接数据库
 connect();

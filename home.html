@@ -119,6 +119,27 @@
     		min-width: 40%;
     	}
     }
+    .extra {
+      position: fixed;
+      right: 5%;
+      top: 5%;
+      z-index: 1;
+      width: 135px;
+      background-color: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .extra ul {
+      width: 100%;
+      list-style: none;
+    }
+    @media (max-width: 500px) {
+      .extra {
+        right: 15px;
+        top: 45px;
+      }
+    }
     .background-image{
       position:absolute;
       top: 0;
@@ -165,10 +186,54 @@
       <a href="https://github.com/Unfantasy/" target="blank">GitHub</a> | <a href="jd_introduce.html">关于我</a>
     </div>
   </div>
+  <div class="extra weather hidden">
+    <ul>
+      <li>位置: <span class="J_city"></span></li>
+      <li>天气状况: <span class="J_weather"></span></li>
+      <li>实时温度: <span class="J_temperature"></span>℃</li>
+    </ul>
+  </div>
   <div class="background-image J_backgroundImage"></div>
   <canvas class="backgound-star"></canvas>
   <script src="js/jquery.min.js"></script>
   <script>
+    // 查询天气
+    $.ajax({
+      url: 'http://restapi.amap.com/v3/ip?key=eacb757c664e60af0f465beba6bfd8cd',
+      dataType: 'jsonp',
+      type: 'get',
+      success: function(data) {
+        if (data.status == '1') {
+          var citycode = data.adcode;
+          var key = 'eacb757c664e60af0f465beba6bfd8cd';
+          var url = 'http://restapi.amap.com/v3/weather/weatherInfo?city=' + citycode + '&key=' + key;
+          $.ajax({
+            url: url,
+            type: 'get',
+            dataType: 'jsonp',
+            success: function(data) {
+              //alert("success"+JSON.stringify(data));
+              if (data.status == '0') {
+                console.log(JSON.stringify(data));
+                alert('获取失败');
+              } else {
+                var weatherObj = data.lives[0];
+                $('.J_city').html(weatherObj.city);
+                $('.J_weather').html(weatherObj.weather);
+                $('.J_temperature').html(weatherObj.temperature);
+                $('.weather').removeClass('hidden');
+                // console.log(JSON.stringify(data));
+              }
+            },
+            error: function(e) {
+              console.log(JSON.stringify(data));
+              alert('AjaxFail: ' + JSON.stringify(e));
+            }
+          });
+        }
+      }
+    })
+
     //箭头点击事件
     $('.J_arrow').click(function() {
       $('.main-box').toggleClass('main-hidden');
