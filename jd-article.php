@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>笔记 / 日记</title>
+    <title>文章详情</title>
     <link rel="icon shotcut" href="images/favicon.ico">
     <link rel="stylesheet" href="css/j-standard.css">
     <link rel="stylesheet" href="css/index.css">

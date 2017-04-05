@@ -23,6 +23,9 @@
         <li>
           <a href="articles.php">文章</a>
         </li>
+        <li>
+          <a href="imgupload.php">上传图片到服务器</a>
+        </li>
         <!-- <li>
           <a href="#"><i class="fa fa-sitemap fa-fw nav_icon"></i>Css<span class="fa arrow"></span></a>
           <ul class="nav nav-second-level">
