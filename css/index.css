@@ -206,7 +206,9 @@ pre code {
   margin-left: 5px;
 }
 .title_content h3 {
-  margin-top: 10px;
+  font-weight: normal;
+  margin-top: 15px;
+  margin-bottom: 13px;
 }
 .title_content p {
   margin-top: 10px;
@@ -229,21 +231,21 @@ pre code {
   -pie-background: linear-gradient(#ffffff, rgba(255, 255, 255, 0));
 }
 .intro_content>table {
-  color: #F27900;
   width: 100%;
+  font-size: 16px;
 }
 .intro_content>table td {
   vertical-align: middle;
-  text-align: center;
+  text-align: left;
   line-height: 1.7;
 }
 .intro_content>table td:nth-child(1) {
-  min-width: 10em;
+  min-width: 6em;
   line-height: 3;
-  font-size: 30px;
+  font-size: 26px;
 }
-.intro_content>table td:nth-child(2) {
-  text-align: left;
+.intro_content .td_padding {
+  padding: 15px 0;
 }
 .intro_content .in_table td, .intro_content .in_table td:nth-child(1) {
   font-size: 16px;

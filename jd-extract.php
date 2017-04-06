@@ -20,7 +20,7 @@ while($row = mysql_fetch_assoc($query)){
 </head>
 <section class="ex">
   <div class="ex_banner1"></div>
-  <div class="content">
+  <div class="content" style="max-width: inherit;">
     <h2>随笔</h2>
     <ol>
       <?php
