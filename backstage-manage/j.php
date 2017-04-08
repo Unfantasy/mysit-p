@@ -75,7 +75,7 @@
                 <th><?php echo $value['id']?></th>
                 <th> <img src="<?php echo $value['imgpath']?>" width="200px"> </th>
                 <td class="table-operation">
-                  <a href="javascript:;" onclick="deleteRow('controller/jlongDeleteController.php?id=<?php echo $value['id']?>')">删除</a>
+                  <a href="javascript:;" onclick="deleteRow('controller/jDeleteController.php?id=<?php echo $value['id']?>')">删除</a>
                 </td>
               </tr>
               <?php

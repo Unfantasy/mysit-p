@@ -7,6 +7,7 @@
     'errorMsg' => ''
   );
   $decription = $_POST['decription'];
+  $date = date("Y-m-d h:i:sa");
 
   $path=ROOT."/images";
   $sitepath = SITEROOT."/images";
@@ -60,12 +61,16 @@
         if(!$record) {
           $insertid = insert($sql, array(
             'imgpath' => $sitedestination,
-            'decription' => $decription
+            'decription' => $decription,
+            'dateline' => $date
           ));
-          $data['insertid'] = $insertid;
+          if ($insertid!=0) {
+            $data['success'] = true;
+            $data['message'] = '文件上传成功';
+            $data['insertid'] = $insertid;
+          }
         }
-        $data['success'] = true;
-        $data['message'] = '文件上传成功';
+
 				unset($file['tmp_name'],$file['size'],$file['type']);
 				$i++;
 			}
