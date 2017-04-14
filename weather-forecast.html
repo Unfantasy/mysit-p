@@ -3,7 +3,7 @@
 
 <head lang="en">
   <meta charset="UTF-8">
-  <title>实时天气查询</title>
+  <title>天气预报</title>
   <meta name="viewport" content="width=device-width,user-scalable=no" />
   <link rel="stylesheet" href="css/j-standard.css">
   <style>
@@ -20,6 +20,9 @@
       margin-left: 10px;
       padding: 0 5px;
     }
+    .result {
+      margin-bottom: 20px;
+    }
   </style>
 
 </head>
@@ -28,22 +31,39 @@
   <div class="content">
     请输入想要查询的城市：<input type="text" id="city" placeholder="如北京" /><input type="button" onclick="getWeather()" value="查询" />
     <br/><br/>
-    <div class="result hidden">
-      <ul>
-        <li>省份： <span class="J_province"></span></li>
-        <li>城市： <span class="J_city"></span></li>
-        <li>天气： <span class="J_weather"></span></li>
-        <li>实时气温： <span class="J_temperature"></span>°C</li>
-        <li>风向： <span class="J_winddirection"></span></li>
-        <li>风力： <span class="J_windpower"></span></li>
-        <li>湿度： <span class="J_humidity"></span></li>
-        <li>时间： <span class="J_reporttime"></span></li>
-      </ul>
+    <div class="results">
+
     </div>
   </div>
   <script src="//cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
   <script src="js/j-function.js"></script>
   <script>
+    function getWeek(num) {
+      switch (num) {
+        case '1':
+          return '周一';
+        break;
+        case '2':
+          return '周二';
+        break;
+        case '3':
+          return '周三';
+        break;
+        case '4':
+          return '周四';
+        break;
+        case '5':
+          return '周五';
+        break;
+        case '6':
+          return '周六';
+        break;
+        case '7':
+          return '周日';
+        break;
+
+      }
+    }
     //高德API
     function getWeather() {
       var key = 'eacb757c664e60af0f465beba6bfd8cd';
@@ -61,42 +81,56 @@
           if (data.status == '0') {
             console.log(JSON.stringify(data));
             alert('获取失败');
-          } else {
-            var adcode = data.districts[0].adcode
-            var data = {
-              city: adcode,
-              key: key
-            };
-            $.ajax({
-              url: 'http://restapi.amap.com/v3/weather/weatherInfo',
-              type: 'get',
-              data: data,
-              dataType: 'jsonp',
-              success: function(data) {
-                //alert("success"+JSON.stringify(data));
-                if (data.status == '0') {
-                  console.log(JSON.stringify(data));
-                  alert('获取失败');
-                } else {
-                  var weatherObj = data.lives[0];
-                  $('.J_province').html(weatherObj.province);
-                  $('.J_city').html(weatherObj.city);
-                  $('.J_weather').html(weatherObj.weather);
-                  $('.J_temperature').html(weatherObj.temperature);
-                  $('.J_winddirection').html(weatherObj.winddirection);
-                  $('.J_windpower').html(weatherObj.windpower);
-                  $('.J_humidity').html(weatherObj.humidity);
-                  $('.J_reporttime').html(new Date(weatherObj.reporttime).format('yyyy年MM月dd日 hh:mm:ss'));
-                  $('.result').removeClass('hidden');
-                  // console.log(JSON.stringify(data));
-                }
-              },
-              error: function(e) {
-                console.log(JSON.stringify(data));
-                alert('AjaxFail: ' + JSON.stringify(e));
-              }
-            });
+            return;
           }
+          if (!data.districts.length) {
+            alert('获取失败');
+            return;
+          }
+          var adcode = data.districts[0].adcode
+          var data = {
+            city: adcode,
+            key: key,
+            extensions: 'all'
+          };
+          $.ajax({
+            url: 'http://restapi.amap.com/v3/weather/weatherInfo',
+            type: 'get',
+            data: data,
+            dataType: 'jsonp',
+            success: function(data) {
+              //alert("success"+JSON.stringify(data));
+              console.log(data);
+              if (data.status == '0') {
+                console.log(JSON.stringify(data));
+                alert('获取失败');
+              }
+              var weatherArr = data.forecasts[0].casts;
+              if (!weatherArr.length) {
+                alert('未查询到数据');
+                return;
+              }
+              var city = data.forecasts[0].city;
+              var htmlArr = weatherArr.map(function(v) {
+                return '<div class="result"><ul><li>时间： ' + v.date + '</li><li>城市： ' + city + '</li><li>温度： ' + v.daytemp + '°C/' + v.nighttemp + '°C</li><li>白天天气： '+v.dayweather+'</li><li>夜间天气： '+v.nightweather+'</li><li>白天风向： '+v.daywind+'</li><li>夜间风向： '+v.nightwind+'</li><li>白天风力： '+v.daypower+'</li><li>夜间风力： '+v.nightpower+'</li><li>星期： '+getWeek(v.week)+'</li></ul></div>';
+              });
+              $('.results').html(htmlArr);
+              // $('.J_province').html(weatherObj.province);
+              // $('.J_city').html(weatherObj.city);
+              // $('.J_weather').html(weatherObj.weather);
+              // $('.J_temperature').html(weatherObj.temperature);
+              // $('.J_winddirection').html(weatherObj.winddirection);
+              // $('.J_windpower').html(weatherObj.windpower);
+              // $('.J_humidity').html(weatherObj.humidity);
+              // $('.J_reporttime').html(new Date(weatherObj.reporttime).format('yyyy年MM月dd日 hh:mm:ss'));
+              // $('.result').removeClass('hidden');
+              // console.log(JSON.stringify(data));
+            },
+            error: function(e) {
+              console.log(JSON.stringify(data));
+              alert('AjaxFail: ' + JSON.stringify(e));
+            }
+          });
         },
         error: function(e) {
           console.log(JSON.stringify(data));
