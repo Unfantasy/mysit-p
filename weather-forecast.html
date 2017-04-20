@@ -18,18 +18,22 @@
     }
     [type="button"] {
       margin-left: 10px;
-      padding: 0 5px;
+      padding: 4px 10px;;
     }
     .result {
       margin-bottom: 20px;
+    }
+    input {
+      font-size: 18px;
+      padding: 5px 0;
     }
   </style>
 
 </head>
 
 <body>
-  <div class="content">
-    请输入想要查询的城市：<input type="text" id="city" placeholder="如北京" /><input type="button" onclick="getWeather()" value="查询" />
+  <div class="content text-center">
+    <input type="text" id="city" placeholder="请输入想要查询的城市" /><input type="button" onclick="getWeather()" value="查询" />
     <br/><br/>
     <div class="results">
 

@@ -74,6 +74,10 @@ input, textarea, button {
   font-weight: bold;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .text-right {
   text-align: right;
 }

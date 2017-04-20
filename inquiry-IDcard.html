@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>身份证信息查询</title>
+  <style>
+    .content {
+      padding: 15px;
+      width: 500px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    ul, li {
+      list-style: none;
+    }
+    [type="button"] {
+      margin-left: 10px;
+      padding: 4px 10px;;
+    }
+    .results {
+      margin-bottom: 20px;
+    }
+    .results > div {
+      margin: 10px;
+    }
+    input {
+      font-size: 18px;
+      padding: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <input type="text" id="J_IDcard" placeholder="请输入要查询的身份证号" /><input type="button" onclick="showResult()" value="查询" />
+    <br/><br/>
+    <div class="results">
+      <div class="J_address"></div>
+      <div class="J_birthday"></div>
+      <div class="J_sex"></div>
+    </div>
+  </div>
+  <script src="js/j-function.js"></script>
+  <script src="//cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+  <script>
+    function showResult(cardno) {
+      var key = '13b77f376ecc370fe1870565f8f00406';
+      var cardno = $('#J_IDcard').val().StripSpace();
+      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+      if (cardno === '') {
+        alert('请输入内容');
+      }
+      if (!reg.test(cardno)) {
+        alert('请输入15或18位身份证号码查询');
+        return;
+      }
+      var url = 'http://apis.juhe.cn/idcard/index?dtype=&cardno=' + cardno + '&key=' + key;
+      $.ajax({
+        url: url,
+        type: 'get',
+        dataType: 'jsonp',
+        success: function(data) {
+          if (data.error_code === 0) {
+            var address = data.result.area;
+            var birthday = data.result.birthday;
+            var sex = data.result.sex;
+            $(".J_address").text('地址: ' + address);
+            $(".J_birthday").text('生日: ' + birthday);
+            birthday = birthday.replace(/[年|月]/g, '-').replace('日', '');
+            if (sex === '女') {
+              if (new Date().format('yyyy') - new Date(birthday).format('yyyy') < 45) sex = '风韵犹存';
+              if (new Date().format('yyyy') - new Date(birthday).format('yyyy') < 30) sex = '萌妹子';
+              if (new Date().format('yyyy') - new Date(birthday).format('yyyy') < 18) sex = '萝莉';
+            }
+            if (sex === '男') {
+              if (new Date().format('yyyy') - new Date(birthday).format('yyyy') < 45) sex = '成熟的男人';
+              if (new Date().format('yyyy') - new Date(birthday).format('yyyy') < 30) sex = '大帅哥';
+              if (new Date().format('yyyy') - new Date(birthday).format('yyyy') < 18) sex = '小鲜肉';
+            }
+            $(".J_sex").text('性别: ' + sex);
+          } else {
+            alert('出错了,请稍后再试');
+          }
+        },
+        error: function() {
+          alert('网络走神了');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

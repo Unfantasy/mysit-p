@@ -74,27 +74,6 @@
           console.log(JSON.stringify(err));
         }
       });
-      $.ajax({
-        url: 'http://apis.baidu.com/3023/shorturl/shorten',
-        type: 'get',
-        data: data,
-        dataType: 'json',
-        beforeSend: function(request) {
-          request.setRequestHeader("apikey", "59cd8be8de571e60594f84872a6fd484");
-        },
-        success: function(data) {
-          //                    alert("success"+JSON.stringify(data));
-          if (data.urls) {
-            var shortUrl = data.urls[0].url_short
-            $("#shortUrl").val(shortUrl);
-          } else {
-            alert(JSON.stringify(data));
-          }
-        },
-        error: function(e) {
-          alert('Fail' + JSON.strignify(e));
-        }
-      });
     }
   </script>
 </body>
